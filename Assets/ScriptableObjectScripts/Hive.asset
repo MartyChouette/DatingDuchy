@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5da1471d159b774590cc84f73845ef0, type: 3}
+  m_Name: Hive
+  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Build.BuildingDefinition
+  id: hive
+  displayName: Hive
+  kind: 5
+  footprint:
+  - dq: 0
+    dr: 0
+  isRoad: 0
+  isShop: 0
+  isSocialNode: 0
+  tavernSpendMin: 1
+  tavernSpendMax: 5
+  jobSlots: 0
+  housingBeds: 0
+  taxValue: 2
+  beauty: 0
+  utility: 0
+  heroPrefab: {fileID: 0}
+  monsterPrefab: {fileID: 7677936289533710515, guid: afc7b1e072649ac4587fd936e74dd1a4, type: 3}
+  spawnEverySeconds: 10
+  prefab: {fileID: 4125092422676965790, guid: 1834ca861ac28644e8d9510394c67304, type: 3}
+  visualOffset: {x: 0, y: 0, z: 0}
+  visualScale: {x: 1, y: 1, z: 1}
