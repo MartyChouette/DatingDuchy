@@ -20,6 +20,7 @@ namespace CozyTown.Core
         MonsterKilled,
 
         RelationshipDelta,  // hook
+        RomanceMilestone,   // crush / dating / lovers / heartbreak
         Note                // free-form debug
     }
 }

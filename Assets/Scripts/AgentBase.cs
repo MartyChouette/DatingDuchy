@@ -19,6 +19,11 @@ namespace CozyTown.Sim
             return _registry.TryGetValue(id, out var a) ? a as T : null;
         }
 
+        public static bool TryGet(int id, out AgentBase agent)
+        {
+            return _registry.TryGetValue(id, out agent);
+        }
+
         public static int CountAgentsOfType<T>() where T : AgentBase
         {
             int count = 0;
