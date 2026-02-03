@@ -9,7 +9,7 @@ namespace CozyTown.Build
         public HexCoord Origin { get; private set; }
         public int RotationSteps { get; private set; }
         public BuildingKind kind => Def != null ? Def.kind : BuildingKind.Other;
-        public int taxValue => Mathf.FloorToInt(owedTax);
+        public int taxValue => Def != null ? Def.taxValue : 0;
 
         // Future runtime state hooks:
         public float owedTax = 0f;

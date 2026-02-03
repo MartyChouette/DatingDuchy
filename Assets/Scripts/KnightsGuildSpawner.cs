@@ -21,7 +21,7 @@ namespace CozyTown.Sim
             int heroes = Object.FindObjectsByType<HeroAgent>(FindObjectsSortMode.None).Length;
             if (heroes >= maxHeroes) return;
 
-            Vector3 p = transform.position + new Vector3(Random.Range(-0.8f, 0f), 0f, Random.Range(-0.8f, 0.8f));
+            Vector3 p = transform.position + new Vector3(Random.Range(-0.8f, 0.8f), 0f, Random.Range(-0.8f, 0.8f));
             Instantiate(heroPrefab, p, Quaternion.identity);
         }
     }

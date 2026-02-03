@@ -8,6 +8,9 @@ namespace CozyTown.Build
         private static readonly List<BuildingInstance> _all = new List<BuildingInstance>(256);
         public static IReadOnlyList<BuildingInstance> All => _all;
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetStatics() => _all.Clear();
+
         public static void Register(BuildingInstance b)
         {
             if (b == null) return;

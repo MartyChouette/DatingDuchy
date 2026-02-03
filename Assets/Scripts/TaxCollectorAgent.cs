@@ -36,19 +36,18 @@ namespace CozyTown.Sim
                 RebuildRoute();
             }
 
-            if (_route.Count == 0)
+            if (_route.Count == 0) return;
+
+            // Remove destroyed buildings from the route
+            while (_route.Count > 0 && _i < _route.Count && _route[_i] == null)
             {
-                RebuildRoute();
-                return;
+                _route.RemoveAt(_i);
+                if (_route.Count > 0 && _i >= _route.Count)
+                    _i = 0;
             }
+            if (_route.Count == 0) return;
 
             var b = _route[_i];
-            if (b == null)
-            {
-                _i = (_i + 1) % _route.Count;
-                return;
-            }
-
             mover.SetTarget(b.transform.position);
             bool arrived = mover.TickMove();
 
@@ -64,7 +63,13 @@ namespace CozyTown.Sim
                 GameEventBus.Emit(GameEvent.Make(GameEventType.TaxCollected, amount: b.taxValue, aId: pid.id, world: b.transform.position, text: b.kind.ToString()));
             }
 
-            _i = (_i + 1) % _route.Count;
+            _i++;
+            if (_i >= _route.Count)
+            {
+                // Finished route — wait for next rebuild timer before collecting again
+                _route.Clear();
+                _i = 0;
+            }
         }
 
         private void RebuildRoute()

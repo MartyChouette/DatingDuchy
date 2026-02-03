@@ -110,8 +110,8 @@ namespace CozyTown.Sim
             if (beds >= peasants) return;
 
             // Spawn a new house building instance automatically.
-            // We place it “freeform” for now (not snapping to hex yet).
-            // Later we’ll pick an empty hex and call registry.Place(def, hex, rot,...)
+            // We place it ï¿½freeformï¿½ for now (not snapping to hex yet).
+            // Later weï¿½ll pick an empty hex and call registry.Place(def, hex, rot,...)
             Vector3 basePos = TownAnchor();
             Vector3 p = basePos + new Vector3(Random.Range(-spawnRadius * 1.5f, spawnRadius * 1.5f), 0f, Random.Range(-spawnRadius * 1.5f, spawnRadius * 1.5f));
 
@@ -122,6 +122,8 @@ namespace CozyTown.Sim
             var inst = go.AddComponent<BuildingInstance>();
             inst.Initialize(houseDefinition, origin: new CozyTown.Grid.HexCoord(0, 0), rotationSteps: 0); // origin is not meaningful yet for freeform
             go.transform.position = p;
+
+            BuildingWorldRegistry.Register(inst);
         }
     }
 }

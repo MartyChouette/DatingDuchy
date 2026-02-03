@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using CozyTown.Core;
 
@@ -8,15 +8,25 @@ namespace CozyTown.Sim
     {
         public static BountySystem Instance { get; private set; }
 
+        [System.Serializable]
         public class Bounty
         {
             public int bountyId;
             public int targetMonsterId;
             public int reward;
             public Vector3 targetPos;
+
             public bool accepted;
             public int acceptedByHeroId;
+
+            public float createdAt;
+
+            // ✅ Visual / runtime links
+            public Transform targetTransform;     // monster transform (optional but useful)
+            public BountyFlagVisual flag;         // spawned flag instance (optional)
         }
+
+        public float bountyExpirationSeconds = 120f;
 
         private int _nextId = 1;
         private readonly List<Bounty> _bounties = new List<Bounty>();
@@ -25,18 +35,43 @@ namespace CozyTown.Sim
 
         private void Awake()
         {
+            if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
+        }
+
+        private void LateUpdate()
+        {
+            // Expire unaccepted bounties that have lived too long (target likely dead)
+            for (int i = _bounties.Count - 1; i >= 0; i--)
+            {
+                var b = _bounties[i];
+                if (!b.accepted && Time.time - b.createdAt > bountyExpirationSeconds)
+                {
+                    CleanupVisuals(b);
+                    GameEventBus.Emit(GameEvent.Make(GameEventType.BountyFailed, amount: b.reward, bId: b.targetMonsterId, world: b.targetPos, text: "Expired"));
+                    _bounties.RemoveAt(i);
+                }
+            }
         }
 
         public Bounty PostBounty(int targetMonsterId, Vector3 targetPos, int reward)
         {
+            // ✅ Prevent duplicate bounties for the same monster
+            for (int i = 0; i < _bounties.Count; i++)
+            {
+                var existing = _bounties[i];
+                if (existing != null && existing.targetMonsterId == targetMonsterId)
+                    return existing;
+            }
+
             var b = new Bounty
             {
                 bountyId = _nextId++,
                 targetMonsterId = targetMonsterId,
                 reward = reward,
                 targetPos = targetPos,
-                accepted = false
+                accepted = false,
+                createdAt = Time.time
             };
             _bounties.Add(b);
 
@@ -49,7 +84,7 @@ namespace CozyTown.Sim
             for (int i = 0; i < _bounties.Count; i++)
             {
                 var b = _bounties[i];
-                if (b.accepted) continue;
+                if (b == null || b.accepted) continue;
 
                 b.accepted = true;
                 b.acceptedByHeroId = heroId;
@@ -63,9 +98,18 @@ namespace CozyTown.Sim
             return false;
         }
 
+        public void IncreaseBountyReward(Bounty b, int increase)
+        {
+            if (b == null || increase <= 0) return;
+            b.reward += increase;
+            GameEventBus.Emit(GameEvent.Make(GameEventType.Note, amount: increase, bId: b.targetMonsterId, world: b.targetPos, text: $"Bounty raised to {b.reward}"));
+        }
+
         public void CompleteBounty(Bounty b)
         {
             if (b == null) return;
+
+            CleanupVisuals(b);
 
             GameEventBus.Emit(GameEvent.Make(GameEventType.BountyCompleted, amount: b.reward, aId: b.acceptedByHeroId, bId: b.targetMonsterId, world: b.targetPos));
             _bounties.Remove(b);
@@ -75,8 +119,20 @@ namespace CozyTown.Sim
         {
             if (b == null) return;
 
+            CleanupVisuals(b);
+
             GameEventBus.Emit(GameEvent.Make(GameEventType.BountyFailed, amount: b.reward, aId: b.acceptedByHeroId, bId: b.targetMonsterId, world: b.targetPos));
             _bounties.Remove(b);
+        }
+
+        void CleanupVisuals(Bounty b)
+        {
+            if (b.flag != null)
+            {
+                Destroy(b.flag.gameObject);
+                b.flag = null;
+            }
+            b.targetTransform = null;
         }
     }
 }

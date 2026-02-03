@@ -77,7 +77,14 @@ namespace CozyTown.Sim
             _state = arrivedState;
             _waitT = waitAtNodeSeconds;
 
-            // “Buy goods” at market (toy economy)
+            // Earn a small wage when returning home
+            if (b.kind == BuildingKind.House)
+            {
+                int wage = Random.Range(2, 5);
+                gold += wage;
+            }
+
+            // ï¿½Buy goodsï¿½ at market (toy economy)
             if (b.kind == BuildingKind.Market && gold > 0)
             {
                 int spend = Mathf.Min(gold, Random.Range(1, 3));
@@ -85,7 +92,7 @@ namespace CozyTown.Sim
                 GameEventBus.Emit(GameEvent.Make(GameEventType.GoldSpent, amount: spend, aId: pid.id, world: b.transform.position, text: "Market"));
             }
 
-            // Sometimes “hang out” at tavern too
+            // Sometimes ï¿½hang outï¿½ at tavern too
             if (b.kind == BuildingKind.Tavern && gold > 0 && Random.value < 0.35f)
             {
                 int spend = Mathf.Min(gold, Random.Range(1, 4));

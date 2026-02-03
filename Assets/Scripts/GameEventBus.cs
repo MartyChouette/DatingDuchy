@@ -33,9 +33,9 @@ namespace CozyTown.Core
 
         public static void Emit(GameEvent e)
         {
-            if (Instance != null)
-                Instance.InternalEmit(e);
+            if (Instance == null) return;
 
+            Instance.InternalEmit(e);
             OnEvent?.Invoke(e);
         }
 

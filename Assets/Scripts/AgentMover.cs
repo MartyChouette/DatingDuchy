@@ -3,7 +3,7 @@ using UnityEngine;
 namespace CozyTown.Sim
 {
     /// <summary>
-    /// Tiny mover: goes straight toward a target point. (We’ll replace with pathfinding later.)
+    /// Tiny mover: goes straight toward a target point. (Weï¿½ll replace with pathfinding later.)
     /// </summary>
     public class AgentMover : MonoBehaviour
     {
@@ -26,7 +26,7 @@ namespace CozyTown.Sim
 
         public bool TickMove()
         {
-            if (!HasTarget) return true;
+            if (!HasTarget) return false;
 
             Vector3 p = transform.position;
             Vector3 t = Target;
