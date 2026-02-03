@@ -26,8 +26,8 @@ MonoBehaviour:
   jobSlots: 2
   housingBeds: 0
   taxValue: 35
-  beauty: 2
-  utility: 5
+  beauty: 0.2
+  utility: 0.5
   heroPrefab: {fileID: 6851075270163917818, guid: 9fe3764eb0e744145a2474abf802189d, type: 3}
   monsterPrefab: {fileID: 7677936289533710515, guid: afc7b1e072649ac4587fd936e74dd1a4, type: 3}
   spawnEverySeconds: 10

@@ -129,7 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4089765}
   - component: {fileID: 4089764}
-  - component: {fileID: 4089766}
   m_Layer: 0
   m_Name: BountyDebug
   m_TagString: Untagged
@@ -166,19 +165,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4089766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4089763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be612450120b89d4090edc38ebd349b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EditorNotes
-  Notes: Add your notes here.
 --- !u!1 &107460060
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +225,6 @@ GameObject:
   - component: {fileID: 220155189}
   - component: {fileID: 220155188}
   - component: {fileID: 220155187}
-  - component: {fileID: 220155191}
   m_Layer: 5
   m_Name: Knights_guild_Building_Menu_Button (2)
   m_TagString: Untagged
@@ -363,24 +348,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220155185}
   m_CullTransparentMesh: 1
---- !u!114 &220155191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220155185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16296c876a9de3b4d8b8065449d80768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.UI.BuildMenuDragSource
-  building: {fileID: 0}
-  buildTool: {fileID: 0}
-  worldCamera: {fileID: 0}
-  canvasRoot: {fileID: 0}
-  dragSprite: {fileID: 0}
-  dragIconScale: 1
 --- !u!1 &222787609
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,82 +398,6 @@ MonoBehaviour:
   canvasRoot: {fileID: 479565212}
   dragSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   dragIconScale: 1.92
---- !u!1 &269772378
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 269772379}
-  - component: {fileID: 269772381}
-  - component: {fileID: 269772380}
-  m_Layer: 5
-  m_Name: WorldUpdateUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &269772379
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 269772378}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1494521123}
-  m_Father: {fileID: 479565212}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &269772380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 269772378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &269772381
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 269772378}
-  m_CullTransparentMesh: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +548,6 @@ GameObject:
   - component: {fileID: 352041848}
   - component: {fileID: 352041847}
   - component: {fileID: 352041846}
-  - component: {fileID: 352041850}
   m_Layer: 5
   m_Name: Tavern_Building_Menu_Button (1)
   m_TagString: Untagged
@@ -678,7 +568,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1942058518}
-  m_Father: {fileID: 627459715}
+  m_Father: {fileID: 1169501210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -781,24 +671,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352041844}
   m_CullTransparentMesh: 1
---- !u!114 &352041850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352041844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16296c876a9de3b4d8b8065449d80768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.UI.BuildMenuDragSource
-  building: {fileID: 0}
-  buildTool: {fileID: 0}
-  worldCamera: {fileID: 0}
-  canvasRoot: {fileID: 0}
-  dragSprite: {fileID: 0}
-  dragIconScale: 1
 --- !u!1 &364804862
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,10 +844,8 @@ GameObject:
   - component: {fileID: 479565213}
   - component: {fileID: 479565217}
   - component: {fileID: 479565216}
-  - component: {fileID: 479565218}
-  - component: {fileID: 479565219}
   m_Layer: 5
-  m_Name: MenuControllerCanvas
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -995,7 +865,6 @@ RectTransform:
   m_Children:
   - {fileID: 627459715}
   - {fileID: 869058306}
-  - {fileID: 269772379}
   m_Father: {fileID: 1152372293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1095,33 +964,6 @@ MonoBehaviour:
   text: {fileID: 1187968394}
   root: {fileID: 869058305}
   toggleKey: 26
---- !u!114 &479565218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479565211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f4db5cc97b387547993abd406cf96c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.UI.WorldUpdatePanel
-  root: {fileID: 269772378}
-  text: {fileID: 1494521124}
---- !u!114 &479565219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479565211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be612450120b89d4090edc38ebd349b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EditorNotes
-  Notes: Add your notes here.
 --- !u!1 &523620981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,20 +973,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 523620985}
-  - component: {fileID: 523620994}
   - component: {fileID: 523620984}
   - component: {fileID: 523620983}
   - component: {fileID: 523620982}
-  - component: {fileID: 523620993}
-  - component: {fileID: 523620992}
-  - component: {fileID: 523620991}
-  - component: {fileID: 523620990}
-  - component: {fileID: 523620989}
-  - component: {fileID: 523620988}
-  - component: {fileID: 523620987}
-  - component: {fileID: 523620986}
   m_Layer: 0
-  m_Name: SimSystems
+  m_Name: Simulation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1212,168 +1045,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &523620986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523620981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f916d1ec5da1d644841dcbcc25fe0e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.UI.WorldUpdateSystem
-  panel: {fileID: 0}
-  festivalDayA: 60
-  festivalDayB: 120
---- !u!114 &523620987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523620981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66d3754a070b0fb4abc95fa5f66b1b09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Sim.BountySystem
---- !u!114 &523620988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523620981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 877b26cc2da114c4fbbb97f53f833bfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Sim.RelationshipSystem
-  affinityPerSecondOfContact: 0.12
-  irritationPerSecondBadLoop: 0.08
-  trendLerp: 0.04
-  alphaThreshold: 0.22
-  zetaThreshold: -0.22
-  acquaintanceAffinity: 10
-  friendAffinity: 30
-  romanceAffinityGate: 40
-  soulmateAffinity: 85
-  nemesisIrritation: 80
---- !u!114 &523620989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523620981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 877d2a8c2971ab845bd92dd82b204c43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Sim.PopulationSystem
-  registry: {fileID: 0}
-  peasantPrefab: {fileID: 0}
-  houseDefinition: {fileID: 0}
-  buildingsParent: {fileID: 0}
-  immigrationCheckEvery: 3
-  housingCheckEvery: 3
-  peasantsPerJobSlot: 1
-  spawnRadius: 3
---- !u!114 &523620990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523620981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82114a08ca8405743a1674df72ad49cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Core.GameEventBus
-  maxBufferedEvents: 500
---- !u!114 &523620991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523620981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c59e3ba7519ede4bb9c7ef9a57214b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Core.MetricsLedger
-  treasury: 0
-  totalTaxesCollected: 0
-  totalBountiesPaid: 0
-  totalGoldSpentAtTavern: 0
-  peasants: 0
-  heroes: 0
-  monsters: 0
-  bountiesPosted: 0
-  bountiesCompleted: 0
-  recentEventLimit: 25
---- !u!114 &523620992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523620981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42d9e379a69ec6145aea555259fb4846, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Core.GameCalendar
-  realSecondsPerDay: 60
-  day: 1
-  year: 1
-  daysPerYear: 120
-  festivalDayA: 60
-  festivalDayB: 120
---- !u!114 &523620993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523620981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 270a40f4655093e4db8e9a0ad9412f80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Core.GameTime
-  minutesPerDayAtNormal: 25
-  halfMult: 0.5
-  normalMult: 1
-  fast1Mult: 2
-  fast2Mult: 4
-  fast3Mult: 8
-  speed: 2
-  dayTime01: 0
-  day: 1
-  year: 1
-  daysPerYear: 120
---- !u!114 &523620994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523620981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be612450120b89d4090edc38ebd349b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EditorNotes
-  Notes: 'Purpose: day/year ticking (speed control later)
-
-
-    Refs: none required
-    unless you added them'
 --- !u!1 &627459714
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,8 +1075,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 352041845}
-  - {fileID: 826939699}
   - {fileID: 1169501210}
   - {fileID: 220155186}
   - {fileID: 1759596618}
@@ -1465,9 +1134,6 @@ GameObject:
   - component: {fileID: 633855838}
   - component: {fileID: 633855837}
   - component: {fileID: 633855836}
-  - component: {fileID: 633855840}
-  - component: {fileID: 633855839}
-  - component: {fileID: 633855841}
   m_Layer: 0
   m_Name: BuildSystem
   m_TagString: Untagged
@@ -1520,62 +1186,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &633855839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633855835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2973ec4c4d48514b879530450603789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Camera.TownCameraController
-  pivot: {fileID: 364804863}
-  cam: {fileID: 330585545}
-  pitchDegrees: 45
-  yawDegrees: 45
-  zoom: 18
-  zoomMin: 8
-  zoomMax: 28
-  yawSpeedDegPerSec: 120
-  panSpeedUnitsPerSec: 12
-  zoomSpeedPerSec: 12
-  smooth: 12
---- !u!114 &633855840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633855835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce270a21837ce5149a6fd63336ce142b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Input.TownInputRouter
-  buildMenu: {fileID: 0}
-  cameraController: {fileID: 0}
-  cursorController: {fileID: 0}
-  buildTool: {fileID: 0}
-  worldCamera: {fileID: 0}
-  groundY: 0
-  mouseActiveSeconds: 1.25
-  gamepadActiveSeconds: 1.25
---- !u!114 &633855841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633855835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be612450120b89d4090edc38ebd349b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EditorNotes
-  Notes: Add your notes here.
 --- !u!1 &790309337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,7 +1196,6 @@ GameObject:
   m_Component:
   - component: {fileID: 790309339}
   - component: {fileID: 790309338}
-  - component: {fileID: 790309340}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Untagged
@@ -1627,174 +1236,6 @@ Transform:
   - {fileID: 993930559}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &790309340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 790309337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be612450120b89d4090edc38ebd349b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EditorNotes
-  Notes: Add your notes here.
---- !u!1 &826939698
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 826939699}
-  - component: {fileID: 826939703}
-  - component: {fileID: 826939702}
-  - component: {fileID: 826939701}
-  - component: {fileID: 826939700}
-  - component: {fileID: 826939704}
-  m_Layer: 5
-  m_Name: TownHall_Building_Menu_Button (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &826939699
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826939698}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 851532016}
-  m_Father: {fileID: 627459715}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -471.65, y: 0}
-  m_SizeDelta: {x: 200, y: 160}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &826939700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826939698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa773e33841fa0f4091a61fe00dbfcf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.UI.BuildMenuButton
-  building: {fileID: 11400000, guid: fbae32bcea62df64cbdf7a289ce69db5, type: 2}
-  buildTool: {fileID: 633855836}
---- !u!114 &826939701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826939698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 826939702}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &826939702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826939698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &826939703
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826939698}
-  m_CullTransparentMesh: 1
---- !u!114 &826939704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826939698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16296c876a9de3b4d8b8065449d80768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.UI.BuildMenuDragSource
-  building: {fileID: 0}
-  buildTool: {fileID: 0}
-  worldCamera: {fileID: 0}
-  canvasRoot: {fileID: 0}
-  dragSprite: {fileID: 0}
-  dragIconScale: 1
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,145 +1285,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &851532015
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 851532016}
-  - component: {fileID: 851532018}
-  - component: {fileID: 851532017}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &851532016
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 851532015}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 826939699}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &851532017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 851532015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: 'TownHall
-
-'
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 0
-  m_fontSizeMax: 0
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 0
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &851532018
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 851532015}
-  m_CullTransparentMesh: 1
 --- !u!1 &869058305
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,7 +1336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8542, g: 1, b: 0.51400006, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2130,7 +1432,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1152372293}
-  - component: {fileID: 1152372294}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -2154,19 +1455,6 @@ Transform:
   - {fileID: 479565212}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1152372294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152372292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be612450120b89d4090edc38ebd349b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EditorNotes
-  Notes: Add your notes here.
 --- !u!1 &1169501209
 GameObject:
   m_ObjectHideFlags: 0
@@ -2180,7 +1468,6 @@ GameObject:
   - component: {fileID: 1169501213}
   - component: {fileID: 1169501212}
   - component: {fileID: 1169501211}
-  - component: {fileID: 1169501215}
   m_Layer: 5
   m_Name: market_Building_Menu_Button
   m_TagString: Untagged
@@ -2201,6 +1488,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1825096475}
+  - {fileID: 352041845}
   m_Father: {fileID: 627459715}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2304,24 +1592,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1169501209}
   m_CullTransparentMesh: 1
---- !u!114 &1169501215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1169501209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16296c876a9de3b4d8b8065449d80768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.UI.BuildMenuDragSource
-  building: {fileID: 0}
-  buildTool: {fileID: 0}
-  worldCamera: {fileID: 0}
-  canvasRoot: {fileID: 0}
-  dragSprite: {fileID: 0}
-  dragIconScale: 1
 --- !u!1 &1175034908
 GameObject:
   m_ObjectHideFlags: 0
@@ -2331,6 +1601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1175034909}
+  - component: {fileID: 1175034910}
   m_Layer: 0
   m_Name: CameraRig
   m_TagString: Untagged
@@ -2354,6 +1625,29 @@ Transform:
   - {fileID: 364804863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1175034910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175034908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2973ec4c4d48514b879530450603789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Camera.TownCameraController
+  pivot: {fileID: 364804863}
+  cam: {fileID: 330585545}
+  pitchDegrees: 45
+  yawDegrees: 45
+  zoom: 18
+  zoomMin: 8
+  zoomMax: 28
+  yawSpeedDegPerSec: 120
+  panSpeedUnitsPerSec: 12
+  zoomSpeedPerSec: 12
+  smooth: 12
 --- !u!1 &1187968392
 GameObject:
   m_ObjectHideFlags: 0
@@ -2411,9 +1705,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'LEDGEROVERELAY
-
-'
+  m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2630,145 +1922,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209140817}
   m_CullTransparentMesh: 1
---- !u!1 &1494521122
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1494521123}
-  - component: {fileID: 1494521125}
-  - component: {fileID: 1494521124}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1494521123
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494521122}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000228, y: 1.0000228, z: 1.0000228}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 269772379}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 65.38}
-  m_SizeDelta: {x: 1900, y: 800}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1494521124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494521122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: 'WORLDUPDATELAYER
-
-'
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1494521125
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494521122}
-  m_CullTransparentMesh: 1
 --- !u!1 &1653544321
 GameObject:
   m_ObjectHideFlags: 0
@@ -2841,10 +1994,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1653544321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be612450120b89d4090edc38ebd349b9, type: 3}
+  m_Script: {fileID: 11500000, guid: ce270a21837ce5149a6fd63336ce142b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EditorNotes
-  Notes: Add your notes here.
+  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Input.TownInputRouter
+  buildMenu: {fileID: 0}
+  cameraController: {fileID: 1175034910}
+  cursorController: {fileID: 790309338}
+  buildTool: {fileID: 633855836}
+  worldCamera: {fileID: 330585545}
+  groundY: 0
+  mouseActiveSeconds: 1.25
+  gamepadActiveSeconds: 1.25
 --- !u!1 &1717677921
 GameObject:
   m_ObjectHideFlags: 0
@@ -2995,7 +2155,6 @@ GameObject:
   - component: {fileID: 1759596621}
   - component: {fileID: 1759596620}
   - component: {fileID: 1759596619}
-  - component: {fileID: 1759596623}
   m_Layer: 5
   m_Name: Monsteer_Hive_Building_Menu_Button (3)
   m_TagString: Untagged
@@ -3119,24 +2278,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759596617}
   m_CullTransparentMesh: 1
---- !u!114 &1759596623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759596617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16296c876a9de3b4d8b8065449d80768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.UI.BuildMenuDragSource
-  building: {fileID: 0}
-  buildTool: {fileID: 0}
-  worldCamera: {fileID: 0}
-  canvasRoot: {fileID: 0}
-  dragSprite: {fileID: 0}
-  dragIconScale: 1
 --- !u!1 &1825096474
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,6 +2415,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825096474}
   m_CullTransparentMesh: 1
+--- !u!1 &1907902867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1907902869}
+  - component: {fileID: 1907902868}
+  m_Layer: 0
+  m_Name: BountySystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1907902868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907902867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66d3754a070b0fb4abc95fa5f66b1b09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Sim.BountySystem
+--- !u!4 &1907902869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907902867}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 448.23987, y: 162.79846, z: 231.6565}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1910870562
 GameObject:
   m_ObjectHideFlags: 0
@@ -3617,8 +2802,9 @@ SceneRoots:
   - {fileID: 222787610}
   - {fileID: 1653544322}
   - {fileID: 790309339}
+  - {fileID: 633855838}
   - {fileID: 1152372293}
   - {fileID: 1924004145}
-  - {fileID: 633855838}
   - {fileID: 523620985}
   - {fileID: 4089765}
+  - {fileID: 1907902869}

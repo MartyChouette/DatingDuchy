@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5da1471d159b774590cc84f73845ef0, type: 3}
-  m_Name: Tavern
+  m_Name: Townhall
   m_EditorClassIdentifier: Assembly-CSharp::CozyTown.Build.BuildingDefinition
-  id: house
-  displayName: House
-  kind: 2
+  id: townHall
+  displayName: Town Hall
+  kind: 0
   footprint:
   - dq: 0
     dr: 0
@@ -26,11 +26,11 @@ MonoBehaviour:
   jobSlots: 0
   housingBeds: 0
   taxValue: 2
-  beauty: 0.2
-  utility: 0.6
-  heroPrefab: {fileID: 6851075270163917818, guid: 9fe3764eb0e744145a2474abf802189d, type: 3}
-  monsterPrefab: {fileID: 7677936289533710515, guid: afc7b1e072649ac4587fd936e74dd1a4, type: 3}
+  beauty: 0.8
+  utility: 0.5
+  heroPrefab: {fileID: 0}
+  monsterPrefab: {fileID: 0}
   spawnEverySeconds: 10
-  prefab: {fileID: 8921243586076606346, guid: c3408322a5a997c49a7074f87509e8d1, type: 3}
+  prefab: {fileID: 0}
   visualOffset: {x: 0, y: 0, z: 0}
   visualScale: {x: 1, y: 1, z: 1}
