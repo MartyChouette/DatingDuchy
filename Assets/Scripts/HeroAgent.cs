@@ -22,7 +22,9 @@ namespace CozyTown.Sim
         private BountySystem.Bounty _bounty;
         private MonsterAgent _targetMonster;
 
-        private const float BountyCheckInterval = 0.5f;
+        [SerializeField] private float distanceNormalizer = 20f;
+
+        private float _bountyCheckInterval;
 
         protected override void Awake()
         {
@@ -34,8 +36,11 @@ namespace CozyTown.Sim
             bravery = Mathf.Clamp(bravery + Random.Range(-2, 3), 0, 10);
             greed = Mathf.Clamp(greed + Random.Range(-2, 3), 0, 10);
 
+            // Greedier heroes check for bounties more eagerly
+            _bountyCheckInterval = 0.7f - greed * 0.04f;
+
             // Stagger bounty checks so heroes don't all check on the same frame
-            _bountyCheckT = Random.Range(0f, BountyCheckInterval);
+            _bountyCheckT = Random.Range(0f, _bountyCheckInterval);
         }
 
         private void Update()
@@ -47,7 +52,7 @@ namespace CozyTown.Sim
                     _bountyCheckT -= Time.deltaTime;
                     if (BountySystem.Instance != null && _bountyCheckT <= 0f)
                     {
-                        _bountyCheckT = BountyCheckInterval;
+                        _bountyCheckT = _bountyCheckInterval;
                         _state = State.SeekingBounty;
                     }
                     break;
@@ -83,11 +88,32 @@ namespace CozyTown.Sim
         {
             if (BountySystem.Instance == null) return false;
 
-            // Greedy heroes check more often; brave heroes accept even if far (we�ll add distance later).
-            if (!BountySystem.Instance.TryAcceptBounty(pid.id, out _bounty))
-                return false;
+            var bounties = BountySystem.Instance.ActiveBounties;
+            BountySystem.Bounty best = null;
+            float bestScore = 0f;
 
-            // Find target monster by ID (cheap search for prototype)
+            for (int i = 0; i < bounties.Count; i++)
+            {
+                var b = bounties[i];
+                if (b == null || b.accepted) continue;
+
+                float distance = Vector3.Distance(transform.position, b.targetPos);
+                float rewardScore = b.reward * (1f + greed * 0.1f);
+                float distancePenalty = (distance / distanceNormalizer) * (1f - bravery * 0.08f);
+                float score = rewardScore - distancePenalty;
+
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    best = b;
+                }
+            }
+
+            if (best == null) return false;
+
+            BountySystem.Instance.AcceptBounty(pid.id, best);
+            _bounty = best;
+
             _targetMonster = FindMonsterById(_bounty.targetMonsterId);
             if (_targetMonster == null)
             {

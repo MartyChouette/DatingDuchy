@@ -79,6 +79,16 @@ namespace CozyTown.Sim
             return b;
         }
 
+        public void AcceptBounty(int heroId, Bounty bounty)
+        {
+            if (bounty == null || bounty.accepted) return;
+
+            bounty.accepted = true;
+            bounty.acceptedByHeroId = heroId;
+
+            GameEventBus.Emit(GameEvent.Make(GameEventType.BountyAccepted, amount: bounty.reward, aId: heroId, bId: bounty.targetMonsterId, world: bounty.targetPos));
+        }
+
         public bool TryAcceptBounty(int heroId, out Bounty bounty)
         {
             for (int i = 0; i < _bounties.Count; i++)
