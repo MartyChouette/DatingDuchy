@@ -129,7 +129,7 @@ namespace CozyTown.Sim
 
             int start = Mathf.Max(0, _recentHighlights.Count - max);
             for (int i = start; i < _recentHighlights.Count; i++)
-                sb.AppendLine("� " + _recentHighlights[i]);
+                sb.AppendLine("- " + _recentHighlights[i]);
         }
 
 

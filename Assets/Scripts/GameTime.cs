@@ -60,7 +60,8 @@ namespace CozyTown.Core
             float dt = Time.deltaTime * mult;
             dayTime01 += dt / _realSecondsPerDay;
 
-            if (dayTime01 >= 1f)
+            // Guard against large deltaTime spikes skipping multiple days
+            while (dayTime01 >= 1f)
             {
                 dayTime01 -= 1f;
                 AdvanceDay();

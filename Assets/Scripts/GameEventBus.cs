@@ -13,6 +13,9 @@ namespace CozyTown.Core
 
         public static event Action<GameEvent> OnEvent;
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetStatics() => OnEvent = null;
+
         [Header("Buffer")]
         [Tooltip("How many recent events to keep in memory for UI.")]
         public int maxBufferedEvents = 500;

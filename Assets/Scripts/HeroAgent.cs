@@ -134,7 +134,8 @@ namespace CozyTown.Sim
                     _atkT = attackCooldown;
                     _targetMonster.TakeDamage(damage);
 
-                    if (_targetMonster == null)
+                    // Check hp instead of null — Destroy is deferred so null check fails same-frame
+                    if (_targetMonster != null && _targetMonster.hp <= 0)
                     {
                         GameEventBus.Emit(GameEvent.Make(GameEventType.MonsterKilled, aId: pid.id, world: transform.position));
                         if (BountySystem.Instance != null) BountySystem.Instance.CompleteBounty(_bounty);
@@ -143,6 +144,7 @@ namespace CozyTown.Sim
                         gold += _bounty.reward;
 
                         _bounty = null;
+                        _targetMonster = null;
                         _state = State.Celebrating;
                     }
                 }
