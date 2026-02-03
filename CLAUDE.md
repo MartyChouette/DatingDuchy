@@ -13,7 +13,7 @@ Unity C# city-builder / dating sim hybrid. Namespace: `CozyTown`. Agents (peasan
 
 ### Key Patterns
 - **Event bus**: `GameEventBus.Emit(GameEvent)` — append-only stream; `MetricsLedger` subscribes to derive counters.
-- **Static agent registry**: `AgentBase._registry` (Dictionary<int, AgentBase>) — O(1) lookup by PersonId, used instead of `FindObjectsOfType`.
+- **Static agent registry**: `AgentBase._registry` (Dictionary<int, AgentBase>) — O(1) lookup by PersonId, used instead of `FindObjectsOfType`. Public access via `AgentBase.TryGet(int, out AgentBase)` and `FindAgentById<T>(int)`.
 - **Static building registry**: `BuildingWorldRegistry` (List + HashSet) — global; `BuildingRegistry` is the hex-aware MonoBehaviour version.
 - **Domain-reload safety**: All static state cleared via `[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]`.
 - **Singleton pattern**: Most managers use `if (Instance != null && Instance != this) { Destroy(gameObject); return; }` in Awake.
@@ -24,6 +24,37 @@ Unity C# city-builder / dating sim hybrid. Namespace: `CozyTown`. Agents (peasan
 3. `AgentBase.TakeDamage(int)` — decrements `hp`; calls `Die()` → emits `PersonDied` → `Destroy(gameObject)`.
 4. `AgentBase.OnDestroy()` — removes from registry.
 5. **Important**: Unity `Destroy()` is deferred. After `TakeDamage`, check `hp <= 0` (not `== null`) for same-frame kill detection.
+
+### Romance System
+Emergent romance built into `RelationshipSystem`. Agents develop relationships through progressive stages driven by personality trait compatibility.
+
+**Personality Traits** (`InspectablePerson`):
+- 5 visible (0-10, default 5, randomized ±3 in Awake): `charm`, `kindness`, `wit`, `courage`, `warmth`
+- 2 hidden (0-10, default 5, randomized ±3 in Awake): `flirtiness`, `loyalty`
+
+**Three relationship axes** (romance-eligible pairs only — monsters excluded via `IsRomanceEligible()`):
+- **Affinity** — base contact gain, modified by trait chemistry (kindness average boosts, warmth similarity boosts, wit mismatch friction)
+- **Attraction** — driven by charm + flirtiness compatibility; decays during negative trend
+- **Trust** — grows after 30s `skinTime` gate; loyalty boosts growth rate; erodes during negative trend
+
+**Progressive romance stages** (each requires the previous):
+- **Crush**: affinity ≥ 40, attraction ≥ 25
+- **Dating**: affinity ≥ 55, attraction ≥ 40, trust ≥ 15 (registers in `_romances` tracking dict)
+- **Lovers**: affinity ≥ 70, attraction ≥ 55, trust ≥ 30
+
+**Heartbreak** — triggers when any axis drops 10 points below its gate (hysteresis prevents oscillation):
+- Lovers breakup clears all romance flags; dating breakup clears dating+crush; crush just fades
+
+**Emergent behaviors**:
+- **Jealousy**: when dating starts, existing partners get +15 irritation and a jealousy highlight
+- **Mourning**: on `PersonDied`, surviving partners' romance flags are cleared and mourning highlight emitted
+- **Monogamy not enforced** — multiple concurrent romances allowed; jealousy emerges naturally
+
+**Events**: All milestones emit `GameEventType.RomanceMilestone` with text = stage name (Crush/Dating/Lovers/Heartbreak/CrushFaded/Jealousy/Mourning).
+
+**Public API**: `GetRelation(int, int)`, `HasActiveRomance(int)`, `GetRomancePartners(int)`
+
+**UI**: `PersonClickSelector` displays trait abbreviations (CHM/KND/WIT/CRG/WRM) and active romances with partner name and stage.
 
 ### Economy Flow
 Treasury ← TaxCollector collects from buildings (taxValue from BuildingDefinition) → Treasury pays bounty rewards → Heroes spend gold at Tavern → Peasants earn wages at home, spend at Market/Tavern.
@@ -56,7 +87,6 @@ All issues from the full codebase audit have been resolved across 6 commits:
 6. `b8742c9` — Final audit fixes (HeroAgent bounty completion hp check, Tavern/Market asset metadata, domain-reload OnEvent clear, encoding fix, GameTime day overflow guard)
 
 ## Known Design Stubs (intentional TODOs in code)
-- Romance gates & monogamy/open relationship emergence
-- Boons/banes from 10 visible stats + hidden traits (RelationshipSystem)
+- `courage` trait not yet used in gameplay (available on InspectablePerson but no system reads it)
 - Monster damage to buildings (currently emits a Note event only)
 - Distance-based bounty acceptance for heroes (bravery/greed not yet influencing decisions)
