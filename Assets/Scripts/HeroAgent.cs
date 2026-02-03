@@ -27,7 +27,7 @@ namespace CozyTown.Sim
         protected override void Awake()
         {
             base.Awake();
-            EmitSpawn("Hero");
+            EmitSpawn(GameEvent.KindHero);
             _state = State.IdleAtTavern;
 
             // Randomize a bit
@@ -179,6 +179,6 @@ namespace CozyTown.Sim
             _state = State.IdleAtTavern;
         }
 
-        protected override string GetAgentKindName() => "Hero";
+        protected override string GetAgentKindName() => GameEvent.KindHero;
     }
 }

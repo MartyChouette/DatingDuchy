@@ -18,7 +18,7 @@ namespace CozyTown.Sim
         protected override void Awake()
         {
             base.Awake();
-            EmitSpawn("TaxCollector");
+            EmitSpawn(GameEvent.KindTaxCollector);
             gold = 0;
         }
 
@@ -87,6 +87,6 @@ namespace CozyTown.Sim
             _i = 0;
         }
 
-        protected override string GetAgentKindName() => "TaxCollector";
+        protected override string GetAgentKindName() => GameEvent.KindTaxCollector;
     }
 }

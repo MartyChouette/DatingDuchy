@@ -18,7 +18,7 @@ namespace CozyTown.Sim
         protected override void Awake()
         {
             base.Awake();
-            EmitSpawn("Monster");
+            EmitSpawn(GameEvent.KindMonster);
             GameEventBus.Emit(GameEvent.Make(GameEventType.MonsterSpawned, aId: pid.id, world: transform.position));
         }
 
@@ -48,6 +48,6 @@ namespace CozyTown.Sim
             }
         }
 
-        protected override string GetAgentKindName() => "Monster";
+        protected override string GetAgentKindName() => GameEvent.KindMonster;
     }
 }

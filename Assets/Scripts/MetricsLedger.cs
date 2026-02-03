@@ -73,15 +73,15 @@ namespace CozyTown.Core
                     break;
 
                 case GameEventType.PersonSpawned:
-                    if (e.text == "Peasant") peasants++;
-                    else if (e.text == "Hero") heroes++;
-                    else if (e.text == "Monster") monsters++;
+                    if (e.text == GameEvent.KindPeasant) peasants++;
+                    else if (e.text == GameEvent.KindHero) heroes++;
+                    else if (e.text == GameEvent.KindMonster) monsters++;
                     break;
 
                 case GameEventType.PersonDied:
-                    if (e.text == "Peasant") peasants = Mathf.Max(0, peasants - 1);
-                    else if (e.text == "Hero") heroes = Mathf.Max(0, heroes - 1);
-                    else if (e.text == "Monster") monsters = Mathf.Max(0, monsters - 1);
+                    if (e.text == GameEvent.KindPeasant) peasants = Mathf.Max(0, peasants - 1);
+                    else if (e.text == GameEvent.KindHero) heroes = Mathf.Max(0, heroes - 1);
+                    else if (e.text == GameEvent.KindMonster) monsters = Mathf.Max(0, monsters - 1);
                     break;
 
                 case GameEventType.MonsterSpawned:

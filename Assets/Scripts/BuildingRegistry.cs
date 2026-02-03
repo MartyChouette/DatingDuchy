@@ -15,6 +15,20 @@ namespace CozyTown.Build
 
         public bool IsOccupied(HexCoord h) => _occupied.ContainsKey(h);
 
+        public void Unregister(BuildingInstance inst)
+        {
+            if (inst == null) return;
+
+            _buildings.Remove(inst);
+
+            // Remove all hex cells that point to this instance
+            var toRemove = new List<HexCoord>();
+            foreach (var kvp in _occupied)
+                if (kvp.Value == inst) toRemove.Add(kvp.Key);
+            foreach (var h in toRemove)
+                _occupied.Remove(h);
+        }
+
         public bool CanPlace(BuildingDefinition def, HexCoord origin, int rotationSteps01to06, HexGridManager grid)
         {
             foreach (var cell in GetFootprintCells(def, origin, rotationSteps01to06))
@@ -49,7 +63,7 @@ namespace CozyTown.Build
 
         public IEnumerable<HexCoord> GetFootprintCells(BuildingDefinition def, HexCoord origin, int rotationSteps01to06)
         {
-            // rotationSteps01to06 = 0..5 (60° steps)
+            // rotationSteps01to06 = 0..5 (60ï¿½ steps)
             foreach (var off in def.footprint)
             {
                 HexCoord rotated = RotateAxial(off.ToHex(), rotationSteps01to06);
@@ -59,7 +73,7 @@ namespace CozyTown.Build
 
         private static HexCoord RotateAxial(HexCoord h, int steps)
         {
-            // Axial rotation about origin in 60° steps (pointy-top).
+            // Axial rotation about origin in 60ï¿½ steps (pointy-top).
             // Convert to cube (x=q, z=r, y=-x-z) then rotate.
             int x = h.q;
             int z = h.r;

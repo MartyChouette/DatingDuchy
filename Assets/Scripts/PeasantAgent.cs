@@ -20,7 +20,7 @@ namespace CozyTown.Sim
         protected override void Awake()
         {
             base.Awake();
-            EmitSpawn("Peasant");
+            EmitSpawn(GameEvent.KindPeasant);
             gold = Random.Range(1, 8);
         }
 
@@ -110,6 +110,6 @@ namespace CozyTown.Sim
             else _state = State.GoingHome;
         }
 
-        protected override string GetAgentKindName() => "Peasant";
+        protected override string GetAgentKindName() => GameEvent.KindPeasant;
     }
 }

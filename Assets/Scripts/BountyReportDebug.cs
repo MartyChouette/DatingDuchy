@@ -6,7 +6,7 @@ namespace CozyTown.Sim
 {
     public class BountyReportDebug : MonoBehaviour
     {
-        public Key reportKey = Key.P;
+        public Key reportKey = Key.B;
 
         readonly StringBuilder _sb = new StringBuilder(2048);
 

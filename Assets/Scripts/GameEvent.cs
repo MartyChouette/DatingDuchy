@@ -5,6 +5,12 @@ namespace CozyTown.Core
     [System.Serializable]
     public struct GameEvent
     {
+        // Agent kind constants — use these instead of raw strings
+        public const string KindPeasant = "Peasant";
+        public const string KindHero = "Hero";
+        public const string KindMonster = "Monster";
+        public const string KindTaxCollector = "TaxCollector";
+
         public float time;
         public GameEventType type;
 
