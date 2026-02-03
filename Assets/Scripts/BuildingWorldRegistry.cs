@@ -6,21 +6,22 @@ namespace CozyTown.Build
     public static class BuildingWorldRegistry
     {
         private static readonly List<BuildingInstance> _all = new List<BuildingInstance>(256);
+        private static readonly HashSet<BuildingInstance> _set = new HashSet<BuildingInstance>(256);
         public static IReadOnlyList<BuildingInstance> All => _all;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void ResetStatics() => _all.Clear();
+        static void ResetStatics() { _all.Clear(); _set.Clear(); }
 
         public static void Register(BuildingInstance b)
         {
             if (b == null) return;
-            if (!_all.Contains(b)) _all.Add(b);
+            if (_set.Add(b)) _all.Add(b);
         }
 
         public static void Unregister(BuildingInstance b)
         {
             if (b == null) return;
-            _all.Remove(b);
+            if (_set.Remove(b)) _all.Remove(b);
         }
 
         public static BuildingInstance FindNearest(BuildingKind kind, Vector3 pos)

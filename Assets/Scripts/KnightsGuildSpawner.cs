@@ -18,7 +18,7 @@ namespace CozyTown.Sim
             if (_t < spawnEverySeconds) return;
             _t = 0f;
 
-            int heroes = Object.FindObjectsByType<HeroAgent>(FindObjectsSortMode.None).Length;
+            int heroes = AgentBase.CountAgentsOfType<HeroAgent>();
             if (heroes >= maxHeroes) return;
 
             Vector3 p = transform.position + new Vector3(Random.Range(-0.8f, 0.8f), 0f, Random.Range(-0.8f, 0.8f));

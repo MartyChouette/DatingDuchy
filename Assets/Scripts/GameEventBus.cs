@@ -17,9 +17,9 @@ namespace CozyTown.Core
         [Tooltip("How many recent events to keep in memory for UI.")]
         public int maxBufferedEvents = 500;
 
-        private readonly List<GameEvent> _buffer = new List<GameEvent>(512);
+        private readonly Queue<GameEvent> _buffer = new Queue<GameEvent>(512);
 
-        public IReadOnlyList<GameEvent> BufferedEvents => _buffer;
+        public IEnumerable<GameEvent> BufferedEvents => _buffer;
 
         private void Awake()
         {
@@ -41,9 +41,9 @@ namespace CozyTown.Core
 
         private void InternalEmit(GameEvent e)
         {
-            _buffer.Add(e);
-            if (_buffer.Count > maxBufferedEvents)
-                _buffer.RemoveRange(0, _buffer.Count - maxBufferedEvents);
+            _buffer.Enqueue(e);
+            while (_buffer.Count > maxBufferedEvents)
+                _buffer.Dequeue();
         }
     }
 }

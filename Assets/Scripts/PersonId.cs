@@ -7,7 +7,12 @@ namespace CozyTown.Sim
         private static int _next = 1000;
         public int id;
 
-        private void Awake()
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetStatics() => _next = 1000;
+
+        private void Awake() => EnsureId();
+
+        public void EnsureId()
         {
             if (id == 0) id = _next++;
         }

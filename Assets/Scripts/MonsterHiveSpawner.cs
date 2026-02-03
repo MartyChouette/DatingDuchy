@@ -6,6 +6,7 @@ namespace CozyTown.Sim
     {
         public GameObject monsterPrefab;
         public float spawnEverySeconds = 6f;
+        public int maxMonsters = 12;
 
         float _t;
 
@@ -16,6 +17,8 @@ namespace CozyTown.Sim
             _t += Time.deltaTime;
             if (_t < spawnEverySeconds) return;
             _t = 0f;
+
+            if (AgentBase.CountAgentsOfType<MonsterAgent>() >= maxMonsters) return;
 
             Vector3 p = transform.position + new Vector3(Random.Range(-1.2f, 1.2f), 0f, Random.Range(-1.2f, 1.2f));
             Instantiate(monsterPrefab, p, Quaternion.identity);

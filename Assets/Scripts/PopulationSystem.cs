@@ -70,7 +70,7 @@ namespace CozyTown.Sim
             return total;
         }
 
-        int CountPeasants() => FindObjectsOfType<PeasantAgent>().Length;
+        int CountPeasants() => AgentBase.CountAgentsOfType<PeasantAgent>();
 
         Vector3 TownAnchor()
         {

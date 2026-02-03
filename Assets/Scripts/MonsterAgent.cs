@@ -11,6 +11,9 @@ namespace CozyTown.Sim
         public float attackCooldown = 1.25f;
 
         private float _atkT;
+        private BuildingInstance _cachedTarget;
+        private float _targetRefreshT;
+        private const float TargetRefreshInterval = 2f;
 
         protected override void Awake()
         {
@@ -21,24 +24,27 @@ namespace CozyTown.Sim
 
         private void Update()
         {
-            // Simple: wander toward nearest TownHall/House/Market if exists
-            var townHall = BuildingWorldRegistry.FindNearest(BuildingKind.TownHall, transform.position);
-            var house = BuildingWorldRegistry.FindNearest(BuildingKind.House, transform.position);
-            var market = BuildingWorldRegistry.FindNearest(BuildingKind.Market, transform.position);
+            _targetRefreshT -= Time.deltaTime;
+            if (_cachedTarget == null || _targetRefreshT <= 0f)
+            {
+                _targetRefreshT = TargetRefreshInterval;
+                _cachedTarget = BuildingWorldRegistry.FindNearest(BuildingKind.TownHall, transform.position)
+                             ?? BuildingWorldRegistry.FindNearest(BuildingKind.House, transform.position)
+                             ?? BuildingWorldRegistry.FindNearest(BuildingKind.Market, transform.position);
+            }
 
-            BuildingInstance target = townHall ?? house ?? market;
-            if (target != null)
-                mover.SetTarget(target.transform.position);
+            if (_cachedTarget != null)
+                mover.SetTarget(_cachedTarget.transform.position);
 
             bool arrived = mover.TickMove();
 
             _atkT -= Time.deltaTime;
-            if (arrived && target != null && _atkT <= 0f)
+            if (arrived && _cachedTarget != null && _atkT <= 0f)
             {
                 _atkT = attackCooldown;
 
-                // For now: “damage building” is a ledger event hook
-                GameEventBus.Emit(GameEvent.Make(GameEventType.Note, aId: pid.id, world: transform.position, text: $"Monster hit {target.kind}"));
+                // For now: ï¿½damage buildingï¿½ is a ledger event hook
+                GameEventBus.Emit(GameEvent.Make(GameEventType.Note, aId: pid.id, world: transform.position, text: $"Monster hit {_cachedTarget.kind}"));
             }
         }
 

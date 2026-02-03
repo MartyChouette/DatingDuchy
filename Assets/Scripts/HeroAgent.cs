@@ -14,12 +14,15 @@ namespace CozyTown.Sim
         public float attackCooldown = 1.0f;
 
         private float _atkT;
+        private float _bountyCheckT;
 
         private enum State { IdleAtTavern, SeekingBounty, Fighting, Celebrating }
         private State _state;
 
         private BountySystem.Bounty _bounty;
         private MonsterAgent _targetMonster;
+
+        private const float BountyCheckInterval = 0.5f;
 
         protected override void Awake()
         {
@@ -30,6 +33,9 @@ namespace CozyTown.Sim
             // Randomize a bit
             bravery = Mathf.Clamp(bravery + Random.Range(-2, 3), 0, 10);
             greed = Mathf.Clamp(greed + Random.Range(-2, 3), 0, 10);
+
+            // Stagger bounty checks so heroes don't all check on the same frame
+            _bountyCheckT = Random.Range(0f, BountyCheckInterval);
         }
 
         private void Update()
@@ -38,8 +44,12 @@ namespace CozyTown.Sim
             {
                 case State.IdleAtTavern:
                     GoToTavern();
-                    if (BountySystem.Instance != null && Time.frameCount % 30 == 0)
+                    _bountyCheckT -= Time.deltaTime;
+                    if (BountySystem.Instance != null && _bountyCheckT <= 0f)
+                    {
+                        _bountyCheckT = BountyCheckInterval;
                         _state = State.SeekingBounty;
+                    }
                     break;
 
                 case State.SeekingBounty:
@@ -73,7 +83,7 @@ namespace CozyTown.Sim
         {
             if (BountySystem.Instance == null) return false;
 
-            // Greedy heroes check more often; brave heroes accept even if far (we’ll add distance later).
+            // Greedy heroes check more often; brave heroes accept even if far (weï¿½ll add distance later).
             if (!BountySystem.Instance.TryAcceptBounty(pid.id, out _bounty))
                 return false;
 
@@ -91,12 +101,7 @@ namespace CozyTown.Sim
 
         private MonsterAgent FindMonsterById(int id)
         {
-            var monsters = GameObject.FindObjectsOfType<MonsterAgent>();
-            foreach (var m in monsters)
-            {
-                if (m != null && m.pid != null && m.pid.id == id) return m;
-            }
-            return null;
+            return FindAgentById<MonsterAgent>(id);
         }
 
         private void TickFight()
@@ -170,7 +175,7 @@ namespace CozyTown.Sim
                 GameEventBus.Emit(GameEvent.Make(GameEventType.GoldSpent, amount: spend, aId: pid.id, world: tavern.transform.position, text: "Tavern"));
             }
 
-            // after a brief “celebration”
+            // after a brief ï¿½celebrationï¿½
             _state = State.IdleAtTavern;
         }
 
