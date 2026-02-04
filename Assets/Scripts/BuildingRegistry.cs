@@ -48,6 +48,7 @@ namespace CozyTown.Build
 
             var inst = go.AddComponent<BuildingInstance>();
             inst.Initialize(def, origin, rotationSteps01to06);
+            inst.Registry = this;
 
             BuildingWorldRegistry.Register(inst);
 

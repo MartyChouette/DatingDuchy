@@ -25,6 +25,9 @@ namespace CozyTown.Core
         public int bountiesPosted;
         public int bountiesCompleted;
 
+        [Header("Buildings")]
+        public int buildingsDestroyed;
+
         private readonly Queue<GameEvent> _recent = new Queue<GameEvent>();
         public int recentEventLimit = 25;
 
@@ -86,6 +89,10 @@ namespace CozyTown.Core
 
                 case GameEventType.MonsterSpawned:
                     // also increments via PersonSpawned; keep for hooks
+                    break;
+
+                case GameEventType.BuildingDestroyed:
+                    buildingsDestroyed++;
                     break;
             }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using CozyTown.Core;
 using CozyTown.Grid;
 
 namespace CozyTown.Build
@@ -14,12 +15,20 @@ namespace CozyTown.Build
         // Future runtime state hooks:
         public float owedTax = 0f;
 
+        // HP system
+        public int hp;
+        public int maxHP;
+        public BuildingRegistry Registry { get; set; }
+
         public void Initialize(BuildingDefinition def, HexCoord origin, int rotationSteps)
         {
 
             Def = def;
             Origin = origin;
             RotationSteps = ((rotationSteps % 6) + 6) % 6;
+
+            maxHP = def.maxHP;
+            hp = maxHP;
 
             // Clear old children if any
             for (int i = transform.childCount - 1; i >= 0; i--)
@@ -46,6 +55,32 @@ namespace CozyTown.Build
 
 
         }
+
+        public void TakeDamage(int dmg)
+        {
+            if (maxHP == 0) return; // indestructible
+
+            hp -= dmg;
+            GameEventBus.Emit(GameEvent.Make(GameEventType.BuildingDamaged,
+                amount: dmg, world: transform.position,
+                text: Def != null ? Def.displayName : "Building"));
+
+            if (hp <= 0)
+                DestroyBuilding();
+        }
+
+        void DestroyBuilding()
+        {
+            GameEventBus.Emit(GameEvent.Make(GameEventType.BuildingDestroyed,
+                world: transform.position,
+                text: Def != null ? Def.displayName : "Building"));
+
+            if (Registry != null)
+                Registry.Unregister(this);
+
+            Destroy(gameObject);
+        }
+
         private void OnDestroy()
         {
             BuildingWorldRegistry.Unregister(this);

@@ -21,6 +21,9 @@ namespace CozyTown.Core
 
         RelationshipDelta,  // hook
         RomanceMilestone,   // crush / dating / lovers / heartbreak
+        BuildingDamaged,
+        BuildingDestroyed,
+
         Note                // free-form debug
     }
 }

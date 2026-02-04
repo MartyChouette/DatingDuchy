@@ -43,8 +43,10 @@ namespace CozyTown.Sim
             {
                 _atkT = attackCooldown;
 
-                // For now: �damage building� is a ledger event hook
-                GameEventBus.Emit(GameEvent.Make(GameEventType.Note, aId: pid.id, world: transform.position, text: $"Monster hit {_cachedTarget.kind}"));
+                _cachedTarget.TakeDamage(damage);
+                // Same-frame destruction check — target may be gone
+                if (_cachedTarget != null && _cachedTarget.hp <= 0)
+                    _cachedTarget = null;
             }
         }
 

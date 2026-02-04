@@ -133,6 +133,10 @@ namespace CozyTown.Sim
                 // Wit mismatch adds friction
                 float witDiff = Mathf.Abs(inspA.wit - inspB.wit);
                 net -= baseGain * Mathf.Max(0f, witDiff - 3f) * 0.03f;
+
+                // Courage average boosts affinity (admirable trait)
+                float courageAvg = (inspA.courage + inspB.courage) * 0.5f;
+                net += baseGain * (courageAvg - 5f) * 0.04f;
             }
 
             return net;

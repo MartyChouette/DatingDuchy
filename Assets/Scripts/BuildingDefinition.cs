@@ -36,6 +36,9 @@ namespace CozyTown.Build
         [Tooltip("How much tax a collector receives when visiting this building (toy Majesty model).")]
         public int taxValue = 2;
 
+        [Tooltip("Building hit points. 0 = indestructible.")]
+        public int maxHP = 50;
+
         [Tooltip("Optional: later, beauty can influence 'pretty path' and desirability.")]
         public float beauty = 0f;
 

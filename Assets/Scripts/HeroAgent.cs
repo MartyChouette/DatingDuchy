@@ -158,7 +158,10 @@ namespace CozyTown.Sim
                 if (d <= attackRange)
                 {
                     _atkT = attackCooldown;
-                    _targetMonster.TakeDamage(damage);
+                    var insp = GetComponent<InspectablePerson>();
+                    int finalDmg = damage;
+                    if (insp != null) finalDmg += Mathf.FloorToInt(insp.courage * 0.2f);
+                    _targetMonster.TakeDamage(finalDmg);
 
                     // Check hp instead of null — Destroy is deferred so null check fails same-frame
                     if (_targetMonster != null && _targetMonster.hp <= 0)
