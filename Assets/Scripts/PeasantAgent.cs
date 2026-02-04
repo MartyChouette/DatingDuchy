@@ -103,11 +103,29 @@ namespace CozyTown.Sim
 
         private void ChooseNext()
         {
-            // Simple cycle with randomness
             float r = Random.value;
-            if (r < 0.45f) _state = State.GoingMarket;
-            else if (r < 0.70f) _state = State.GoingTavern;
-            else _state = State.GoingHome;
+            var gt = GameTime.Instance;
+
+            if (gt != null && gt.IsNight)
+            {
+                // Late night: mostly go home, rarely tavern
+                if (r < 0.05f) _state = State.GoingTavern;
+                else _state = State.GoingHome;
+            }
+            else if (gt != null && gt.IsEvening)
+            {
+                // Evening: tavern-heavy
+                if (r < 0.10f) _state = State.GoingMarket;
+                else if (r < 0.70f) _state = State.GoingTavern;
+                else _state = State.GoingHome;
+            }
+            else
+            {
+                // Daytime: market-heavy
+                if (r < 0.50f) _state = State.GoingMarket;
+                else if (r < 0.65f) _state = State.GoingTavern;
+                else _state = State.GoingHome;
+            }
         }
 
         protected override string GetAgentKindName() => GameEvent.KindPeasant;

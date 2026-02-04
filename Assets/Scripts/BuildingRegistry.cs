@@ -57,6 +57,12 @@ namespace CozyTown.Build
                 _occupied[cell] = inst;
 
             _buildings.Add(inst);
+
+            // Recalculate adjacency bonuses for the new building and its neighbors
+            inst.RecalculateAdjacencyBonuses();
+            foreach (var neighbor in GetAdjacentBuildings(inst))
+                neighbor.RecalculateAdjacencyBonuses();
+
             OnBuildingPlaced?.Invoke(inst);
 
             return inst;
@@ -72,7 +78,24 @@ namespace CozyTown.Build
             }
         }
 
-        private static HexCoord RotateAxial(HexCoord h, int steps)
+        public List<BuildingInstance> GetAdjacentBuildings(BuildingInstance inst)
+        {
+            var result = new List<BuildingInstance>();
+            var seen = new HashSet<BuildingInstance> { inst };
+            foreach (var off in inst.Def.footprint)
+            {
+                HexCoord cell = inst.Origin + RotateAxial(off.ToHex(), inst.RotationSteps);
+                for (int d = 1; d <= 6; d++)
+                {
+                    HexCoord neighbor = cell.Neighbor(d);
+                    if (_occupied.TryGetValue(neighbor, out var adj) && seen.Add(adj))
+                        result.Add(adj);
+                }
+            }
+            return result;
+        }
+
+        internal static HexCoord RotateAxial(HexCoord h, int steps)
         {
             // Axial rotation about origin in 60� steps (pointy-top).
             // Convert to cube (x=q, z=r, y=-x-z) then rotate.

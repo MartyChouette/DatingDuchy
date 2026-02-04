@@ -42,6 +42,10 @@ namespace CozyTown.Core
 
         public DayPhase CurrentPhase => PhaseFrom(dayTime01);
 
+        public bool IsDaytime => CurrentPhase >= DayPhase.Morning && CurrentPhase <= DayPhase.LateAfternoon;
+        public bool IsEvening => CurrentPhase == DayPhase.Night;
+        public bool IsNight => CurrentPhase >= DayPhase.Midnight || CurrentPhase == DayPhase.EarlyMorning;
+
         float _realSecondsPerDay;
 
         void Awake()

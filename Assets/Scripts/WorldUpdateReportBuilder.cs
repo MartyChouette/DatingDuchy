@@ -1,6 +1,5 @@
 using System.Text;
 using CozyTown.Core;
-using CozyTown.Sim;
 
 namespace CozyTown.UI
 {
@@ -12,7 +11,7 @@ namespace CozyTown.UI
 
             var t = GameTime.Instance;
             var m = MetricsLedger.Instance;
-            var rel = RelationshipSystem.Instance;
+            var log = TownLog.Instance;
 
             sb.AppendLine("<b>World Update</b>");
             if (t != null) sb.AppendLine($"Year {t.year}, Day {t.day}");
@@ -30,19 +29,18 @@ namespace CozyTown.UI
                 sb.AppendLine();
             }
 
-            // Relationship highlights
-            if (rel != null)
+            // Recent highlights from all systems
+            sb.AppendLine("<b>Recent Highlights</b>");
+            if (log != null)
             {
-                sb.AppendLine("<b>Relationships</b>");
-                rel.AppendHighlights(sb, kind);
-                sb.AppendLine();
+                int count = kind == WorldUpdateKind.FestivalMidyear ? 6 : 10;
+                log.AppendRecent(sb, count);
             }
             else
             {
-                sb.AppendLine("<b>Relationships</b>");
-                sb.AppendLine("(RelationshipSystem not in scene yet.)");
-                sb.AppendLine();
+                sb.AppendLine("(TownLog not in scene yet.)");
             }
+            sb.AppendLine();
 
             // Flavor
             sb.AppendLine(kind switch

@@ -59,9 +59,12 @@ NPCs have:
 - **Personality traits** (`InspectablePerson`) — 5 visible (charm, kindness, wit, courage, warmth) + 2 hidden (flirtiness, loyalty), all 0-10, randomized +/-3 in Awake.
 - **Relationship stats** — affinity, attraction, trust, irritation, tracked per pair in `RelationshipSystem`.
 - **Romance milestones** — Crush, Dating, Lovers (progressive). Jealousy, Mourning, Heartbreak emerge naturally.
+- **Time-of-day schedules** — Agents check `GameTime.CurrentPhase` to vary behavior:
+  - PeasantAgent: Daytime market-heavy, evening tavern-heavy, late night go home.
+  - HeroAgent: Sleeps at tavern during night (Midnight/LateNight/EarlyMorning), hunts bounties during day.
+  - TaxCollectorAgent: Only collects taxes during daytime (Morning-LateAfternoon).
 
 NOT YET IMPLEMENTED:
-- Schedules (time-of-day gating for NPC routines)
 - Preferences (likes/dislikes for places, gifts, activities)
 - Triggers (quests, rivalries beyond jealousy)
 
@@ -83,8 +86,8 @@ NOT YET IMPLEMENTED:
 - `WorldUpdatePanel` — festival/new-year reports with treasury, population, bounty, and relationship highlights.
 - `LedgerOverlayUI` — live stats overlay (L key).
 - `PersonClickSelector` — click agents to see traits, romance partners, HP, gold.
-- `WorldUpdateReportBuilder` — assembles text reports from system data.
-- The "Recent Highlights" log exists inside `RelationshipSystem` but is not yet a unified first-class system that all systems publish into.
+- `WorldUpdateReportBuilder` — assembles text reports from system data, pulls highlights from `TownLog`.
+- `TownLog` (singleton) — unified highlight log that collects entries from all systems (romance, social, economy, combat, building). Auto-subscribes to `GameEventBus` for combat/building events; `RelationshipSystem` pushes romance/social entries directly.
 
 ## Data Model
 
@@ -154,9 +157,38 @@ Courage (`InspectablePerson.courage`, 0-10) affects two systems:
 ### Building Damage System
 - `BuildingDefinition.maxHP` (default 50, 0 = indestructible).
 - `BuildingInstance.TakeDamage(int)` decrements hp, emits `BuildingDamaged`, calls `DestroyBuilding()` at 0.
-- `DestroyBuilding()` emits `BuildingDestroyed`, unregisters from hex registry, destroys GameObject.
+- `DestroyBuilding()` emits `BuildingDestroyed`, unregisters from hex registry, recalculates neighbor adjacency bonuses, destroys GameObject.
 - `BuildingRegistry.Place()` sets `inst.Registry = this` for hex cleanup on destruction.
 - `MetricsLedger.buildingsDestroyed` tracks destructions.
+
+### Adjacency Bonus System
+- `BuildingDefinition.beauty` and `BuildingDefinition.utility` are float fields on ScriptableObjects.
+- On placement and destruction, `BuildingInstance.RecalculateAdjacencyBonuses()` sums beauty/utility from hex-adjacent buildings.
+- `beautyBonus` increases effective `taxValue` by `floor(beautyBonus * 0.5)`.
+- `utilityBonus` increases `maxHP` by `floor(utilityBonus * 2)` (base HP rebuilt from definition, hp capped at new max).
+- `BuildingRegistry.GetAdjacentBuildings(inst)` returns distinct neighboring BuildingInstances across all footprint cells.
+- Recalculation runs for the placed/destroyed building AND all its neighbors.
+- Notable bonuses are logged to `TownLog` with `LogCategory.Building`.
+
+### Town Log System
+- `TownLog` (singleton, namespace `CozyTown.Core`) — unified append-only highlight log.
+- `LogCategory` enum: Romance, Social, Economy, Combat, Building.
+- `LogEntry` struct: time, category, text.
+- Auto-generates entries from `GameEventBus` for: BountyPosted, BountyCompleted, MonsterKilled, BuildingDestroyed, PersonDied.
+- `RelationshipSystem` pushes entries directly via `TownLog.Instance?.Push()` for romance/social milestones.
+- `WorldUpdateReportBuilder` calls `TownLog.Instance.AppendRecent(sb, count)` for festival reports.
+- Domain-reload safe via `[RuntimeInitializeOnLoadMethod]`.
+- Max 200 entries (configurable via `maxEntries`).
+- Public API: `Push(LogCategory, string)`, `AppendRecent(StringBuilder, int)`, `Entries` (IReadOnlyList).
+
+### NPC Schedule System
+- `GameTime` provides convenience properties: `IsDaytime` (Morning-LateAfternoon), `IsEvening` (Night phase), `IsNight` (Midnight, LateNight, EarlyMorning).
+- **PeasantAgent**: `ChooseNext()` uses phase-dependent weights:
+  - Daytime: Market 50%, Tavern 15%, Home 35%
+  - Evening: Market 10%, Tavern 60%, Home 30%
+  - Night: Tavern 5%, Home 95%
+- **HeroAgent**: Skips bounty checks during `IsNight` (sleeps at tavern). Fighting/celebrating states unaffected.
+- **TaxCollectorAgent**: Entire Update() skipped when `!IsDaytime` (no collection at night/evening).
 
 ## File Conventions
 - Scripts live in `Assets/Scripts/`.
@@ -185,6 +217,9 @@ Courage (`InspectablePerson.courage`, 0-10) affects two systems:
 - Population system (auto-spawn peasants for jobs, auto-build houses)
 - UI overlays (ledger, agent inspector, world update reports)
 - Event bus architecture
+- Unified town log (`TownLog` singleton — collects highlights from all systems)
+- NPC schedules (time-of-day gating for peasant, hero, tax collector)
+- Adjacency bonuses (beauty boosts tax value, utility boosts HP for neighboring buildings)
 
 ### Not Yet Implemented
 - Items, inventory, and gift-giving
@@ -194,11 +229,8 @@ Courage (`InspectablePerson.courage`, 0-10) affects two systems:
 - Multi-resource economy (materials, food beyond gold)
 - Building production/consumption per tick
 - World threat escalation
-- Adjacency bonuses (beauty/utility fields exist but unused)
-- NPC schedules with time-of-day gating
 - NPC preferences (likes/dislikes)
 - Save/load persistence
-- Unified highlights log as first-class system
 - ScriptableObject definitions for NPCs, items, monsters, bounties
 
 ## Audit History (completed)

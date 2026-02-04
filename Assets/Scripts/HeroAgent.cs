@@ -49,6 +49,9 @@ namespace CozyTown.Sim
             {
                 case State.IdleAtTavern:
                     GoToTavern();
+                    // Heroes sleep at night — skip bounty checks
+                    if (GameTime.Instance != null && GameTime.Instance.IsNight)
+                        break;
                     _bountyCheckT -= Time.deltaTime;
                     if (BountySystem.Instance != null && _bountyCheckT <= 0f)
                     {

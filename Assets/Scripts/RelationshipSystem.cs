@@ -1,7 +1,5 @@
 using CozyTown.Core;
-using CozyTown.UI;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 namespace CozyTown.Sim
@@ -46,7 +44,6 @@ namespace CozyTown.Sim
         public float heartbreakHysteresis = 10f;
 
         readonly Dictionary<ulong, RelState> _rels = new(8192);
-        readonly List<string> _recentHighlights = new(256);
         readonly Dictionary<int, HashSet<int>> _romances = new(256);
 
         void Awake()
@@ -196,27 +193,27 @@ namespace CozyTown.Sim
             if (!rel.isAcquaintances && rel.affinity >= acquaintanceAffinity)
             {
                 rel.isAcquaintances = true;
-                PushHighlight($"{NameOf(a)} and {NameOf(b)} became <b>acquaintances</b>.");
+                TownLog.Instance?.Push(LogCategory.Social, $"{NameOf(a)} and {NameOf(b)} became acquaintances.");
             }
 
             if (!rel.isFriends && rel.affinity >= friendAffinity)
             {
                 rel.isFriends = true;
-                PushHighlight($"{NameOf(a)} and {NameOf(b)} became <b>friends</b>.");
+                TownLog.Instance?.Push(LogCategory.Social, $"{NameOf(a)} and {NameOf(b)} became friends.");
             }
 
             // Soulmate (rare, non-romantic allowed)
             if (!rel.isSoulmates && rel.affinity >= soulmateAffinity && rel.charge != RelCharge.Zeta)
             {
                 rel.isSoulmates = true;
-                PushHighlight($"{NameOf(a)} and {NameOf(b)} formed a rare <b>Soulmate Bond</b>.");
+                TownLog.Instance?.Push(LogCategory.Social, $"{NameOf(a)} and {NameOf(b)} formed a rare Soulmate Bond.");
             }
 
             // Nemesis (mutual; obsession is separate later)
             if (!rel.isNemesis && rel.irritation >= nemesisIrritation)
             {
                 rel.isNemesis = true;
-                PushHighlight($"{NameOf(a)} and {NameOf(b)} became <b>Nemeses</b>.");
+                TownLog.Instance?.Push(LogCategory.Social, $"{NameOf(a)} and {NameOf(b)} became Nemeses.");
             }
 
             // Romance milestones
@@ -236,8 +233,7 @@ namespace CozyTown.Sim
             if (!rel.isCrushing && rel.affinity >= crushAffinity && rel.attraction >= crushAttraction)
             {
                 rel.isCrushing = true;
-                string msg = $"{NameOf(a)} and {NameOf(b)} developed a <b>crush</b>!";
-                PushHighlight(msg);
+                TownLog.Instance?.Push(LogCategory.Romance, $"{NameOf(a)} and {NameOf(b)} developed a crush!");
                 EmitRomanceEvent(ida, idb, "Crush");
             }
 
@@ -248,8 +244,7 @@ namespace CozyTown.Sim
                 rel.isDating = true;
                 RegisterRomance(ida, idb);
                 CheckJealousy(a, b, ida, idb);
-                string msg = $"{NameOf(a)} and {NameOf(b)} started <b>dating</b>!";
-                PushHighlight(msg);
+                TownLog.Instance?.Push(LogCategory.Romance, $"{NameOf(a)} and {NameOf(b)} started dating!");
                 EmitRomanceEvent(ida, idb, "Dating");
             }
 
@@ -258,8 +253,7 @@ namespace CozyTown.Sim
                 rel.affinity >= loversAffinity && rel.attraction >= loversAttraction && rel.trust >= loversTrust)
             {
                 rel.isLovers = true;
-                string msg = $"{NameOf(a)} and {NameOf(b)} became <b>lovers</b>!";
-                PushHighlight(msg);
+                TownLog.Instance?.Push(LogCategory.Romance, $"{NameOf(a)} and {NameOf(b)} became lovers!");
                 EmitRomanceEvent(ida, idb, "Lovers");
             }
         }
@@ -277,8 +271,7 @@ namespace CozyTown.Sim
                 rel.isDating = false;
                 rel.isCrushing = false;
                 UnregisterRomance(ida, idb);
-                string msg = $"{NameOf(a)} and {NameOf(b)} <b>broke up</b> (were lovers).";
-                PushHighlight(msg);
+                TownLog.Instance?.Push(LogCategory.Romance, $"{NameOf(a)} and {NameOf(b)} broke up (were lovers).");
                 EmitRomanceEvent(ida, idb, "Heartbreak");
             }
             else if (rel.isDating && !rel.isLovers &&
@@ -289,8 +282,7 @@ namespace CozyTown.Sim
                 rel.isDating = false;
                 rel.isCrushing = false;
                 UnregisterRomance(ida, idb);
-                string msg = $"{NameOf(a)} and {NameOf(b)} <b>stopped dating</b>.";
-                PushHighlight(msg);
+                TownLog.Instance?.Push(LogCategory.Romance, $"{NameOf(a)} and {NameOf(b)} stopped dating.");
                 EmitRomanceEvent(ida, idb, "Heartbreak");
             }
             else if (rel.isCrushing && !rel.isDating &&
@@ -298,8 +290,7 @@ namespace CozyTown.Sim
                       rel.attraction < crushAttraction - heartbreakHysteresis))
             {
                 rel.isCrushing = false;
-                string msg = $"{NameOf(a)} and {NameOf(b)}'s crush <b>faded</b>.";
-                PushHighlight(msg);
+                TownLog.Instance?.Push(LogCategory.Romance, $"{NameOf(a)} and {NameOf(b)}'s crush faded.");
                 EmitRomanceEvent(ida, idb, "CrushFaded");
             }
         }
@@ -348,7 +339,7 @@ namespace CozyTown.Sim
 
                 string agentName = NameOf(agent);
                 string partnerName = NameOfId(partnerId);
-                PushHighlight($"{partnerName} feels <b>jealous</b> about {agentName}'s new romance.");
+                TownLog.Instance?.Push(LogCategory.Romance, $"{partnerName} feels jealous about {agentName}'s new romance.");
                 EmitRomanceEvent(agentId, partnerId, "Jealousy");
             }
         }
@@ -374,7 +365,7 @@ namespace CozyTown.Sim
                 {
                     string partnerName = NameOfId(partnerId);
                     string deceasedName = NameOfId(deceasedId);
-                    PushHighlight($"{partnerName} <b>mourns</b> the loss of {deceasedName}.");
+                    TownLog.Instance?.Push(LogCategory.Romance, $"{partnerName} mourns the loss of {deceasedName}.");
                     EmitRomanceEvent(deceasedId, partnerId, "Mourning");
                 }
             }
@@ -407,24 +398,6 @@ namespace CozyTown.Sim
         {
             return _romances.TryGetValue(agentId, out var set) ? set : null;
         }
-
-        // --- Highlights & queries ---
-
-        void PushHighlight(string s)
-        {
-            _recentHighlights.Add(s);
-            if (_recentHighlights.Count > 120) _recentHighlights.RemoveAt(0);
-        }
-
-        public void AppendHighlights(System.Text.StringBuilder sb, WorldUpdateKind kind)
-        {
-            int max = kind == WorldUpdateKind.FestivalMidyear ? 6 : 10;
-
-            int start = Mathf.Max(0, _recentHighlights.Count - max);
-            for (int i = start; i < _recentHighlights.Count; i++)
-                sb.AppendLine("- " + _recentHighlights[i]);
-        }
-
 
         public List<RelState> GetTopRelationshipsByTrend(int count)
         {

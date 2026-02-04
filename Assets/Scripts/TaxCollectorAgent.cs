@@ -29,6 +29,10 @@ namespace CozyTown.Sim
 
         private void Update()
         {
+            // Tax collector only works during daytime
+            if (GameTime.Instance != null && !GameTime.Instance.IsDaytime)
+                return;
+
             _t += Time.deltaTime;
             if (_t >= collectEverySeconds)
             {
